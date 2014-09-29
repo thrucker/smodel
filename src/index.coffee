@@ -2,12 +2,20 @@ module.exports = ->
     class model
         @attrs: []
         @defaults: {}
+        @getter: {}
+        @setter: {}
 
         @attr: (name, opts) ->
             @attrs.push name
 
             if opts?.default
                 @defaults[name] = opts.default
+
+            if opts?.getter
+                @getter[name] = opts.getter
+
+            if opts?.setter
+                @setter[name] = opts.setter
 
             return @
 
@@ -38,10 +46,17 @@ module.exports = ->
 
                     _observeIfArray()
 
+                    _getter = @constructor.getter[attr]
+                    unless _getter
+                        _getter = -> return _value
+
+                    _setter = @constructor.setter[attr]
+                    unless _setter
+                        _setter = (value) -> _value = value
+
                     props[attr] =
                         enumerable: true
-                        get: ->
-                            return _value
+                        get: _getter
                         set: (value) ->
                             Object.getNotifier(@).notify
                                 type: 'update'
@@ -51,7 +66,8 @@ module.exports = ->
                             if Object.prototype.toString.call(_value) is '[object Array]'
                                 Array.unobserve _value, _arrayObserveCallback
 
-                            _value = value
+                            # TODO: fix observe for non-default setter
+                            _setter value
                             _observeIfArray()
 
                             return
