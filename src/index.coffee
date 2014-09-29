@@ -19,7 +19,7 @@ module.exports = ->
 
             return @
 
-        constructor: (data) ->
+        constructor: (data = {}) ->
             props = {}
 
             for attr in @constructor.attrs
