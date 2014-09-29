@@ -1,9 +1,14 @@
 module.exports = ->
     class model
         @attrs: []
+        @defaults: {}
 
-        @attr: (name) ->
+        @attr: (name, opts) ->
             @attrs.push name
+
+            if opts?.default
+                @defaults[name] = opts.default
+
             return @
 
         constructor: (data) ->
@@ -11,7 +16,7 @@ module.exports = ->
 
             for attr in @constructor.attrs
                 do (attr) =>
-                    _value = data[attr]
+                    _value = data[attr] or @constructor.defaults[attr]
                     _arrayObserveCallback = (changes) =>
                         for change in changes
                             continue unless change.type is 'splice'
