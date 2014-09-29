@@ -45,7 +45,8 @@ module.exports = ->
                                 name: attr
                                 oldValue: _value
 
-                            Array.unobserve _value, _arrayObserveCallback if _value
+                            if Object.prototype.toString.call(_value) is '[object Array]'
+                                Array.unobserve _value, _arrayObserveCallback
 
                             _value = value
                             _observeIfArray()
