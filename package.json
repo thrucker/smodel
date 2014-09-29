@@ -1,0 +1,9 @@
+{
+  "name": "smodel",
+  "version": "0.0.1",
+  "repository": "git://github.com/thrucker/smodel.git",
+  "main": "lib/index.js",
+  "devDependencies": {
+    "coffee-script": "1.8.0"
+  }
+}
