@@ -45,7 +45,7 @@ module.exports = ->
                                 name: attr
                                 oldValue: _value
 
-                            Array.unobserve _value, _arrayObserveCallback
+                            Array.unobserve _value, _arrayObserveCallback if _value
 
                             _value = value
                             _observeIfArray()
