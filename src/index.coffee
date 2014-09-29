@@ -92,4 +92,8 @@ module.exports = ->
                         for change in changes
                             if event is "#{change.name}:#{change.type}"
                                 cb @[change.name]
-                                return
+            else
+                Object.observe @, (changes) =>
+                    for change in changes
+                        cb change.data
+                , [event]
