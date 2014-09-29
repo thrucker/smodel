@@ -88,7 +88,7 @@ module.exports = ->
                     @_getArrayObserversForAttribute(match[1], match[2]).push cb
                     return
                 else if match[2] in ['update']
-                    Object.observe @, (changes) ->
+                    Object.observe @, (changes) =>
                         for change in changes
                             if event is "#{change.name}:#{change.type}"
                                 cb @[change.name]
