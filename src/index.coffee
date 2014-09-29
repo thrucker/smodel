@@ -97,3 +97,9 @@ module.exports = ->
                     for change in changes
                         cb change.data
                 , [event]
+
+        emit: (event, data) ->
+            Object.getNotifier(@).notify({
+                type: event,
+                data: data
+            })
