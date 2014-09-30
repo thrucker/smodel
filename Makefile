@@ -19,5 +19,6 @@ node_modules/package.d: package.json
 
 build: $(SRC_FILES)
 	$(COFFEE) -o lib -c src
+	cp src/*.js lib
 
 test:

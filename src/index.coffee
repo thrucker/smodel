@@ -1,3 +1,5 @@
+require './observe'
+
 module.exports = ->
     class model
         @attrs: []

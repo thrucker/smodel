@@ -13,7 +13,8 @@
     "component/dom": "*"
   },
   "scripts": [
-    "lib/index.js"
+    "lib/index.js",
+    "lib/observe.js"
   ],
   "main": "lib/index.js",
   "license": "MIT"
